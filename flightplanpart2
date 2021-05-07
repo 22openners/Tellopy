@@ -1,0 +1,26 @@
+from djitellopy import tello
+from time import sleep
+
+drone = tello.Tello()
+
+#Connects
+drone.connect()
+
+#Takeoff and Leg 1
+drone.takeoff()
+
+#Leg 2 Raises to 6 feet
+drone.send_rc_control(0,0,50,0)
+sleep(3.92)
+
+#Leg 3 Rotates to follow the line
+drone.send_rc_control(0,0,0,-50)
+sleep(0.46)
+
+#Leg 4 Goes forward 14.3 feet
+drone.send_rc_control(0,50,0,0)
+sleep(3.9)
+
+#Leg 5 Stops forward motion and then lands
+drone.send_rc_control(0,0,0,0)
+drone.land()
