@@ -6,12 +6,14 @@ from time import sleep
 
 kp.init()
 
-me = tello.Tello()
+drone = tello.Tello()
 
-me.connect()
+drone.streamon()
 
-print(me.get_battery())
+drone.connect()
 
+print(drone.get_battery())
+#Gets the Keyboard input
 def getKeyboardInput():
 
     lr, fb, ud, yv = 0, 0, 0, 0
@@ -26,7 +28,7 @@ def getKeyboardInput():
 
     elif kp.getKey(“DOWN”): fb = -speed
 
-    if kp.getKey(“w”):ud = speed
+    if kp.getKey(“w”): ud = speed
 
     elif kp.getKey(“s”): ud = -speed
 
@@ -44,6 +46,13 @@ while True:
 
     vals = getKeyboardInput()
 
-    me.send_rc_control(vals[0], vals[1], vals[2], vals[3])
+    drone.send_rc_control(vals[0], vals[1], vals[2], vals[3])
 
     sleep(0.05)
+
+#Stream Window
+while True:
+  img = drone.get.frame_read().frame
+  img = cv2.resize(img, (360, 240))
+  cv2.imshow("image", img)
+  cv2.waitKey(1)
