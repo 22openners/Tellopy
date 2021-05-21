@@ -1,8 +1,7 @@
 from djitellopy import tello
-
 import KeyPressModule as kp
-
 from time import sleep
+import cv2
 
 kp.init()
 
