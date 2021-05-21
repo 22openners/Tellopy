@@ -20,25 +20,25 @@ def getKeyboardInput():
 
     speed = 50
 
-    if kp.getKey(“LEFT”): lr = -speed
+    if kp.getKey("LEFT"): lr = -speed
 
-    elif kp.getKey(“RIGHT”): lr = speed
+    elif kp.getKey("RIGHT"): lr = speed
 
-    if kp.getKey(“UP”): fb = speed
+    if kp.getKey("UP"): fb = speed
 
-    elif kp.getKey(“DOWN”): fb = -speed
+    elif kp.getKey("DOWN"): fb = -speed
 
-    if kp.getKey(“w”): ud = speed
+    if kp.getKey("w"): ud = speed
 
-    elif kp.getKey(“s”): ud = -speed
+    elif kp.getKey("s"): ud = -speed
 
-    if kp.getKey(“a”):yv = -speed
+    if kp.getKey("a"):yv = -speed
 
-    elif kp.getKey(“d”): yv = speed
+    elif kp.getKey("d"): yv = speed
 
-    if kp.getKey(“q”): me.land(); sleep(3)
+    if kp.getKey("q"): drone.land(); sleep(3)
 
-    if kp.getKey(“e”): me.takeoff()
+    if kp.getKey("e"): drone.takeoff()
 
     return [lr, fb, ud, yv]
 
