@@ -26,6 +26,7 @@ tello = Tello()
 # global img
 # tello.streamon()
 
+points = []
 
 def getKeyboardInput():
 
@@ -74,6 +75,7 @@ def getKeyboardInput():
         cv2.imwrite(f'Resources/Images/{time.time()}.jpg', img)
         time.sleep(0.3)
 
+    time.sleep(interval)
     a += yaw
     x += int(d*math.cos(math.radians(a)))
     y += int(d*math.sin(math.radians(a)))
@@ -82,8 +84,9 @@ def getKeyboardInput():
     return [lr, fb, ud, yv, x, y]
 
 
-def drawPoints():
-    cv2.circle(img, (points[0], points[1]), 20, (0, 0, 255), cv2.FILLED)
+def drawPoints(img, points):
+    for point in points:
+        cv2.circle(img, points, 10, (255, 0, 0), cv2.FILLED)
 
 
 while True:
@@ -93,6 +96,7 @@ while True:
     tello.send_rc_control(vals[0], vals[1], vals[2], vals[3])
 
     img = np.zeros((1000, 1000, 3), np.uint8)
+    points.append((vals[4],vals[5]))
     points = (vals[4], vals[5])
     drawPoints(img, points)
 
@@ -102,4 +106,4 @@ while True:
 # img = tello.get_frame_read().frame
 # img = cv2.resize(img, (360, 240))
 # cv2.imshow("image", img)
-# cv2.waitKey(1)5)
+# cv2.waitKey(1)
